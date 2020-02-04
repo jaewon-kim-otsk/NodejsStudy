@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewporint" content="width-device-width, initial-scale=1">
+        <title>Main Title</title>
+    </head>
+    <body>
+
+        <form action="/QuerySubmit" method="post">
+            사용자의 이름을 입력하세요 : <input type="text" name = "InputName"><br><br/>
+            <input type = "hidden">
+        </form>
+
+        <div class="result"></div>
+
+        <button class="ajaxsend"> Click Me </button>
+        <script>
+            document.querySelector('.ajaxsend').addEventListener('click', function(){
+            var inputdata = document.forms[0].elements[0].value
+            sendAjax('http://localhost:4000/QueryData', inputdata)
+        })
+
+        function sendAjax(url, data){
+                var data = {'UserInput' : data};
+                data = JSON.stringify(data);
+
+                var xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', url);               
+                xhr.setRequestHeader('content-type', "application/json")
+                xhr.send(data);
+
+                xhr.addEventListener('load', function(){
+                  var result = JSON.parse(xhr.responseText);
+
+                    if(result.result == "OK"){
+                        document.querySelector('.result').innerHTML = result.Name + "님 (" + result.Age + ") 환영합니다"
+                    }
+                    if(result.result == "NG"){
+                        document.querySelector('.result').innerHTML = result.Name + "님 은 팀에 소속되어 있지 않습니다."
+                    }
+                })
+            }
+         </script>
+
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Search data</title>
+    </head>
+    
+    <body>
+        <form action = "/User/user_post" method = "post">
+            Please put your User_ID : <input type = "text" name = "UserID"><br/>
+            <input type = "submit">
+        </form><br/>
+        
+        <button class="ajaxsend">AjaxSend</button>
+
+        <div class="result"></div>
+
+        <script>
+            document.querySelector('.ajaxsend').addEventListener('click', function(){
+                var inputdata = document.forms[0].elements[0].value;
+                sendAjax('http://localhost:5000/User/ajax', inputdata);
+            })
+
+            function sendAjax(url, data){
+                var data = {'UserID' : data};
+                data = JSON.stringify(data);
+
+                var xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', url);
+                xhr.setRequestHeader('content-type', "application/json");
+                xhr.send(data);
+
+                xhr.addEventListener('load', function(){
+                    var result = JSON.parse(xhr.responseText);
+                    var resultDiv = document.querySelector('.result');
+                    //console.log(xhr.responseText);
+
+                    if(result.result !== "OK") resultDiv.innerHTML = "Your UserID information is not found"
+                    else resultDiv.innerHTML = "환영합니다!!!  " + result.name;
+                })
+            }
+        </script>
+    </body>
+</html>
