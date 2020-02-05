@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1">
+        <title>JOIN</title>
+    </head>
+    
+    <body>
+        <h2> Please join my site </h2>
+
+        <!-- URL 에서 get 으로 얻은 것과, 아래에서 post 로 보내는 것의 정보가 모두 '/join' 으로 동일하므로
+        index_join_mysql.js 에서는 이를 구분하기 위하여 get/post 방식을 모두 사용했음 -->
+        <form action="/join" method="post">
+        Email : <input type="text" name="email"><br>
+        Name : <input type="text" name="name"><br>
+        Password : <input type="text" name="password"><br><br>
+        <input type="submit">
+        
+        </form>
+    </body>
+</html>

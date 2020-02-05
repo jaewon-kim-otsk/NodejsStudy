@@ -4,7 +4,7 @@ var router = express.Router()
 var path = require('path')
 var main = require('./main/main_oracle')
 var email = require('./email/email_oracle')
-
+var join = require('./join/index_join_oracle')
 
 // 첫 페이지
 router.get('/', function(request, response){
@@ -15,5 +15,6 @@ router.get('/', function(request, response){
 // app.use('/email', email)
 router.use('/main', main)
 router.use('/User', email)
+router.use('/join', join)
 
 module.exports = router;
