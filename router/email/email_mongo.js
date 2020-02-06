@@ -119,7 +119,7 @@ router.post('/user_post', function(request, response){
 })
 
 
-// 화면에서, <AjaxSend> 버튼을 누르는 경우
+// 화면에서, <AjaxSend> 버튼을 누르는
 router.post('/ajax', function(request, response){
     //console.log(request.body.UserID)
     
