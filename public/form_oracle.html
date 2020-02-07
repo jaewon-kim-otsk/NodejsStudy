@@ -6,7 +6,7 @@
     </head>
     
     <body>
-        <form action = "/User/form" method = "post">
+        <form action = "/email/form" method = "post">
             Please Enter a UserID : <input type = "text" name = "UserId"><br/>
             <input type = "submit">
         </form><br/>
@@ -18,7 +18,7 @@
         <script>
             document.querySelector('.ajaxsend').addEventListener('click', function(){
                 var inputdata = document.forms[0].elements[0].value;
-                sendAjax('http://localhost:4000/User/ajax', inputdata);
+                sendAjax('http://localhost:4000/email/ajax', inputdata);
             })
 
             function sendAjax(url, data){
@@ -34,10 +34,10 @@
                 xhr.addEventListener('load', function(){
                     var result = JSON.parse(xhr.responseText);
                     var resultDiv = document.querySelector('.result');
-                    //console.log(xhr.responseText);
+                    //console.log(result)
 
                     if(result.result !== "OK") resultDiv.innerHTML = "Your Name is not found on DB"
-                    else resultDiv.innerHTML = result.name;
+                    else resultDiv.innerHTML = result.name;        
                 })
             }
         </script>

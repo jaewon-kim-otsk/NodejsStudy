@@ -6,8 +6,8 @@
     </head>
     
     <body>
-        <form action = "/User/user_post" method = "post">
-            Please put your User_ID : <input type = "text" name = "UserID"><br/>
+        <form action = "/email/user_post" method = "post">
+            Please put your Email Address : <input type = "text" name = "UserEmailAddress"><br/>
             <input type = "submit">
         </form><br/>
         
@@ -18,11 +18,11 @@
         <script>
             document.querySelector('.ajaxsend').addEventListener('click', function(){
                 var inputdata = document.forms[0].elements[0].value;
-                sendAjax('http://localhost:5000/User/ajax', inputdata);
+                sendAjax('http://localhost:5000/email/ajax', inputdata);
             })
 
             function sendAjax(url, data){
-                var data = {'UserID' : data};
+                var data = {'UserEmailAddress' : data};
                 data = JSON.stringify(data);
 
                 var xhr = new XMLHttpRequest();
@@ -37,7 +37,7 @@
                     //console.log(xhr.responseText);
 
                     if(result.result !== "OK") resultDiv.innerHTML = "Your UserID information is not found"
-                    else resultDiv.innerHTML = "환영합니다!!!  " + result.name;
+                    else resultDiv.innerHTML = "환영합니다!!!   " + result.name + "  님.";
                 })
             }
         </script>

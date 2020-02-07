@@ -111,7 +111,7 @@ router.post('/user_post', function(request, response){
     //response.send("<h1> Welcome " + request.body.email + "</h1>")
 
     // View Engine 사용 
-    response.render('email_mongo.ejs', {'UserIdInfo' : request.body.UserID})
+    response.render('email_mongo.ejs', {'UserIdInfo' : request.body.UserEmailAddress})
     
     // 단순확인
     //response.send("post resonse")
@@ -127,10 +127,10 @@ router.post('/ajax', function(request, response){
     // response.json(responseData)
 
     // MongoDB
-    var UserInput = request.body.UserID;
+    var UserInput = request.body.UserEmailAddress;
     var responseData = {};
 
-     UserInfo.findOne({EU_ID:UserInput}, function(error, getResponse){
+     UserInfo.findOne({EMAIL:UserInput}, function(error, getResponse){
        console.log('--- Read Only one ---');
        //console.log(getResponse)
        if(getResponse==null){
