@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Search data</title>
+    </head>
+    
+    <body>
+        <form action = "/email/form" method = "post">
+            <h1>Login Page</h1>
+            email : <input type = "text" name = "email"><br/>
+            password : <input type = "password" name = "password"><br/>
+
+        </form><br/>
+        
+        <button class="ajaxsend">login</button>
+
+        <div class="result"></div>
+
+        <script>
+            document.querySelector('.ajaxsend').addEventListener('click', function(){
+                //var inputdata = document.forms[0].elements[0].value;
+                var email = document.getElementsByName('email')[0].value
+                var password = document.getElementsByName('password')[0].value
+                sendAjax('http://localhost:3000/login', {'email':email,'password':password})
+            })
+
+            function sendAjax(url, data){
+                //var data = {'email' : data};
+                data = JSON.stringify(data);
+
+                var xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', url);
+                xhr.setRequestHeader('content-type', "application/json");
+                xhr.send(data);
+
+                xhr.addEventListener('load', function(){
+                    var result = JSON.parse(xhr.responseText);
+                    var resultDiv = document.querySelector('.result');
+                    //console.log(xhr.responseText);
+
+                    //if(result.email !== "OK") resultDiv.innerHTML = "Your E-mail is not found"
+                    //if(result.email) resultDiv.innerHTML = 'Welcome,  ' + result.email + '  !!'
+                    if(result.email){
+                        window.location.href="/main"  // 접속에 성공하면 main 으로 redirect
+                    }
+                    else resultDiv.innerHTML = result;
+                })
+            }
+        </script>
+    </body>
+</html>
